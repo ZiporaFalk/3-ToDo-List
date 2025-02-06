@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi;
 //"ConnectionStrings":{"ToDoDB": "server=localhost;user=root;password=aA1795aA;database=ToDoDB"}
 
-var builder = WebApplication.CreateBuilder(args);//s
-builder.Services.AddCors(options =>//s
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
@@ -22,8 +22,8 @@ options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString))
 
 builder.Services.AddControllers();///
 builder.Services.AddAuthorization();
-builder.Services.AddEndpointsApiExplorer();//s
-builder.Services.AddSwaggerGen();//s
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -34,7 +34,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 app.UseCors("AllowAll");
-// app.UseAuthorization();////
+app.UseAuthorization();////
 app.MapControllers();////
 app.MapGet("/", () => "TodoList API is running");
 
