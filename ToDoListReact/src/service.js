@@ -63,7 +63,7 @@ export default {
       console.log("deleteTask not sucsses");
     }
   }
-};
+}; 
 
 
 
