@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("https://three-todo-list.onrender.com")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
@@ -19,7 +19,7 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
 
 );
 
-builder.Services.AddControllers();///
+builder.Services.AddControllers();//
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
