@@ -56,7 +56,7 @@ export default {
 
   deleteTask: async (id) => {
     try {
-      const result = await axios.put(`${config.apiUrl}/Items/${id}`)
+      const result = await axios.delete(`${config.apiUrl}/Items/${id}`)
       console.log("deleteTask");
     } catch (e) {
       console.log(e);
