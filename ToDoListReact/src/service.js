@@ -44,7 +44,7 @@ export default {
 
   setCompleted: async (id, isComplete) => {
     try {
-      const result = await axios.put(`${config.apiUrl}/Items/${id}`,{ IsComplete:isComplete})
+      const result = await axios.put(`${config.apiUrl}/Items/${id}/${isComplete}`)
       console.log("SetComplete");
     } catch (e) {
       console.log(e);
