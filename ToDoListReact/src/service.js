@@ -12,15 +12,15 @@ axios.interceptors.response.use(
       url: error.config?.url,
       method: error.config?.method,
     });
-
-    return Promise.reject(error); // החזרת השגיאה להמשך טיפול
+    return Promise.reject(error);
   }
 );
 
 export default {
   getTasks: async () => {
     try {
-      const result = await axios.get(`${config.apiUrl}/items`)
+      console.log(process.env.REACT_APP_URL);
+      const result = await axios.get(`${config.apiUrl}/Items`)
       return result.data;
     }
     catch (e) {
@@ -32,7 +32,7 @@ export default {
   addTask: async (name) => {
     console.log('addTask', name)
     try {
-      const result = await axios.post(`${config.apiUrl}/items`, { name: name, IsComplete: false })
+      const result = await axios.post(`${config.apiUrl}/Items`, { name: name, IsComplete: false })
       console.log("AddTask");
     } catch (e) {
       console.log(e);
@@ -44,7 +44,7 @@ export default {
 
   setCompleted: async (id, isComplete) => {
     try {
-      const result = await axios.put(`${config.apiUrl}/items/${id}`,{ IsComplete:isComplete})
+      const result = await axios.put(`${config.apiUrl}/Items/${id}`,{ IsComplete:isComplete})
       console.log("SetComplete");
     } catch (e) {
       console.log(e);
@@ -56,7 +56,7 @@ export default {
 
   deleteTask: async (id) => {
     try {
-      const result = await axios.put(`${config.apiUrl}/items/${id}`)
+      const result = await axios.put(`${config.apiUrl}/Items/${id}`)
       console.log("deleteTask");
     } catch (e) {
       console.log(e);

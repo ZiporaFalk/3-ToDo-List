@@ -15,8 +15,7 @@ builder.Services.AddCors(options =>
 
 var conectionString = builder.Configuration.GetConnectionString("ToDoDB");
 builder.Services.AddDbContext<ToDoDbContext>(options =>
-
-options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString))
+    options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString))
 
 );
 
@@ -40,8 +39,15 @@ app.MapGet("/", () => "TodoList API is running");
 
 app.MapGet("/Items", async (ToDoDbContext db) =>
 {
-    var item = await db.Items.ToListAsync();
-    return Results.Ok(item);
+    try
+    {
+        var items = await db.Items.ToListAsync();
+        return Results.Ok(items);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Error fetching items: {ex.Message}");
+    }
 });
 app.MapPost("/Items", async (ToDoDbContext db, Item newItem) =>
 {
